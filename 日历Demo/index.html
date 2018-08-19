@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js写日期插件</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			font-family: "微软雅黑";
+		}
+		a{
+			text-decoration: none;
+		}
+		.back{
+			width: 348px;
+			height: 240px;
+			background: #f7f7f7;
+			border: 1px solid #d7d7d7;
+		}
+		.left{
+			width: 108px;
+			height: 144px;
+			text-align: center;
+			padding: 43px 0;
+			float: left;
+		}
+		.left img{
+			display: block;
+			margin: 0 auto;
+			cursor: pointer;
+			padding: 4px;
+			border-radius: 50%;
+		}
+		 .left img:hover{
+			border: 1px solid #D8D8D8;
+			padding: 3px;
+		} 
+		.mid{
+			height: 80px;
+			margin: 10px 0;
+		}
+		.mid span:nth-of-type(1){
+			font-size: 14px;
+			color: #B4ABAD;
+		}
+		.mid span:nth-of-type(2),.mid span:nth-of-type(3){
+			font-size: 24px;
+			color: #0AA770;
+		}
+		.mid span:nth-of-type(4){
+			font-size: 13px;
+			color: #B4ABAD;
+		}
+		.mian_top{
+			width: 240px;
+			height: 45px;
+			float: left;
+		}
+		.mian_top > span{
+			display: inline-block;
+			float: left;
+			width: 30px;
+			height: 28px;
+			margin: 1px 1px 0 0;
+			color: #0AA770;
+			font-size: 12px;
+			text-align: center;
+			line-height: 28px;
+			padding-top: 14px;
+		}
+		#red{	color: #FE7200;}
+		#red1{	color: #FE7200;}
+		#day{
+			width: 217px;
+			height: 174px;
+			padding: 0 23px 21px 0;
+			float: left;
+		}
+		#day > div{
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			color: #222;
+			text-align: center;
+			line-height: 30px;
+			font-size: 13px;
+			margin: 1px 1px 0 0;
+			float: left;
+			cursor: pointer;
+		}
+		#day > div:hover{
+			background: #E6F3DE;
+			color: #88BAA9;
+		}
+		.click{
+			background: #E6F3DE;
+		}
+		.main{
+			width: 350px;
+			height:500px;
+			background: #f1f1f1;
+		}
+		.news{
+			width: 310px;
+			height:218px;
+			padding: 20px;
+			line-height: 30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="back">
+		<div class="left">
+			<img src="top.png" alt="" width="18" id="shang" title="上一页" onclick="fun(this)"/>
+			<div class="mid">
+				<span id="bian_nian">xxxx</span><br />
+				<span id="bian_yue">x</span><span>月</span><br />
+				<span id="now_time">xx:xx</span>
+			</div>
+			<img src="bottom.png" alt="" width="18" id="xia" title="下一页" onclick="fun(this)"/>
+		</div>
+		<div class="mian_top">
+			<span>一</span>
+			<span>二</span>
+			<span>三</span>
+			<span>四</span>
+			<span>五</span>
+			<span id="red">六</span>
+			<span id="red1">日</span>
+		</div>
+		<div id="day">
+			
+		</div>
+	</div>
+	<div class="news">无日程</div>
+</div>
+</body>
+<script type="text/javascript">
+	var dayy=document.getElementById("day");
+	var inne=document.getElementById("bian_yue");
+	var bian_nian=document.getElementById("bian_nian");
+	var now_time=document.getElementById("now_time");
+	var ml=31;
+	var m=new Date().getMonth()+1;
+	var y=new Date().getFullYear();
+	inne.innerHTML=m;
+	bian_nian.innerHTML=y;
+
+	setInterval(function(){
+		var hour=new Date().getHours();
+		var minute=new Date().getMinutes();
+		if (parseInt(minute)<10) {
+			now_time.innerHTML=hour+":"+"0"+minute;
+		}else{
+			now_time.innerHTML=hour+":"+minute;
+		}
+	});
+	
+	var day1 = new Date(y,m,0);
+	var daycount = day1.getDate();//获取当月天数
+	var xq=new Date(y,m-1,1).getDay();
+	var flag=1;
+	for(var i=0;i<daycount;i++){
+		var ele=document.createElement("div");
+		ele.innerHTML=flag;
+		document.getElementById('day').appendChild(ele);
+		if (ele.innerHTML==(new Date().getDate())) {
+			ele.style.background="#0AA770";
+			ele.style.color="#fff";
+		}
+		flag++;
+	}
+	rr(xq);
+
+	function fun(e){
+		if (e.id=="shang") {
+			inne.innerHTML-=1;
+			m-=1;
+			var ts=new Date(y,m+1,0).getDate();
+			if (inne.innerHTML=="0") {
+				inne.innerHTML=12;
+				y-=1;
+				m=12;
+				ts=new Date(y+1,1,0).getDate();
+				bian_nian.innerHTML=y;
+			}
+		}else if(e.id=="xia"){
+			inne.innerHTML=parseInt(inne.innerHTML)+1;
+			m+=1;
+			var ts=new Date(y,m-1,0).getDate();
+			if (inne.innerHTML=="13") {
+				inne.innerHTML=1;
+				y+=1;
+				m=1;
+				ts=new Date(y-1,12,0).getDate();
+				bian_nian.innerHTML=y;
+			}
+		}
+		var day1 = new Date(y,m,0);
+		var daycount = day1.getDate();//获取当月天数
+		var xq=new Date(y,m-1,1).getDay();
+		var flag=1;
+		for(i=0;i<ts;i++){
+			dayy.removeChild(dayy.children[0])
+		}
+		for(i=0;i<daycount;i++){
+			var ele=document.createElement("div");
+			ele.innerHTML=flag;
+			document.getElementById('day').appendChild(ele);
+			if (ele.innerHTML==(new Date().getDate())) {
+				ele.style.background="#88BAA9";
+				ele.style.color="#fff";
+				if (inne.innerHTML==(new Date().getMonth()+1) && bian_nian.innerHTML==(new Date().getFullYear())) {
+					ele.style.background="#0AA770";
+					ele.style.color="#fff";
+				}
+			}
+			flag++;
+		}
+        rr(xq);
+		dayNews()
+	}
+	function dayNews() {
+		var child=document.getElementById("day").children;
+		for(var i=0;i<child.length;i++){
+			child[i].onclick=function () {
+				for(var i=0;i<child.length;i++){
+					child[i].className="";
+				}
+				this.className="click";
+
+				var thisDay=this.innerHTML;
+				var thisYear=this.parentElement.previousElementSibling.previousElementSibling.children[1].children[0].innerHTML;
+				var thisMonth=this.parentElement.previousElementSibling.previousElementSibling.children[1].children[2].innerHTML;
+				document.getElementsByClassName("news")[0].innerHTML=thisYear+" "+thisMonth+" "+thisDay;
+
+			}
+		}
+	}dayNews();
+function rr(xq){
+	switch (xq){
+	case 0:
+		dayy.children[0].style.marginLeft=6*ml+"px";
+	  	break;
+	case 1:
+		dayy.children[0].style.marginLeft=0;
+	  	break;
+	case 2:
+		dayy.children[0].style.marginLeft=1*ml+"px";
+	  	break;
+	case 3:
+		dayy.children[0].style.marginLeft=2*ml+"px";
+	  	break;
+	case 4:
+		dayy.children[0].style.marginLeft=3*ml+"px";
+	  	break;
+	case 5:
+		dayy.children[0].style.marginLeft=4*ml+"px";
+	  	break;
+	case 6:
+		dayy.children[0].style.marginLeft=5*ml+"px";
+	  	break;
+	}
+}
+</script>
+</html>
