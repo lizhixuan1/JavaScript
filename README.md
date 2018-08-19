@@ -1,8 +1,9 @@
-## JavaScript文件夹
-> 存储JS相关案例
+## Typing-Game 分支
+存储 实现H5版本打字小游戏 全部代码<br>
+Storage implementation H5 version of the typing small game all the code
+---
 
-#### 分支介绍
+> 案例截图<br>
+Case screenshots
 
-> Vue-Demo 分支
-
-存储 [使用Vue实现购物车案例](https://github.com/lizhixuan1/Vue/tree/Vue-Demo) 全部代码
+![image](https://github.com/lizhixuan1/JavaScript/blob/Typing-Game/pic.png?raw=true)
