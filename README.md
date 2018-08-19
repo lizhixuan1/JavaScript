@@ -3,6 +3,14 @@
 
 #### 分支介绍
 
-> Vue-Demo 分支
+> Calendar 分支
 
-存储 [使用Vue实现购物车案例](https://github.com/lizhixuan1/Vue/tree/Vue-Demo) 全部代码
+存储 [使用Js实现日历案例](https://github.com/lizhixuan1/JavaScript/tree/Calendar) 全部代码
+
+> Typing-Game 分支
+
+存储 [使用H5实现苹果打字小游戏案例](https://github.com/lizhixuan1/JavaScript/tree/Typing-Game) 全部代码
+
+> Waterfall 分支
+
+存储 [使用Js实现图片瀑布流加载案例](https://github.com/lizhixuan1/JavaScript/tree/Waterfall) 全部代码
