@@ -1,16 +1,15 @@
-## JavaScript文件夹
-> 存储JS相关案例
+## Async-Load 分支
 
-#### 分支介绍
+存储 实现页面模块异步加载 全部代码<br>
+Store the implementation page module asynchronously load all the code
+---
 
-> Calendar 分支
+> 案例截图<br>
+Case screenshots
 
-存储 [使用Js实现日历案例](https://github.com/lizhixuan1/JavaScript/tree/Calendar) 全部代码
+![image](https://github.com/lizhixuan1/JavaScript/blob/Async-Load/pic.png?raw=true)
 
-> Typing-Game 分支
+> 博客地址<br>
+Blog address
 
-存储 [使用H5实现苹果打字小游戏案例](https://github.com/lizhixuan1/JavaScript/tree/Typing-Game) 全部代码
-
-> Waterfall 分支
-
-存储 [使用Js实现图片瀑布流加载案例](https://github.com/lizhixuan1/JavaScript/tree/Waterfall) 全部代码
+[https://www.cnblogs.com/lizhixuan/p/9503391.html](https://www.cnblogs.com/lizhixuan/p/9503391.html)
