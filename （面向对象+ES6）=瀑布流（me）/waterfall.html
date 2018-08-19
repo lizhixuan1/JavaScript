@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流效果</title>
+    <link href="css/waterfall.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <!--<script src="js/waterfall.js" type="text/javascript"></script>-->
+</head>
+<body>
+<div class="container" id="container">
+    <div class="box">
+        <div class="content">
+            <img src="images/1.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/2.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/3.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/4.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/5.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/6.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/7.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/8.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/9.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/10.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/1.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/2.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/3.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/4.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/5.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/6.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/7.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/8.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/9.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/10.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/1.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/2.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/3.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/4.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/5.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/6.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/7.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/8.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/9.jpg" width="200"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="content">
+            <img src="images/10.jpg" width="200"/>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function Position(box,container,data){
+        this.boxWidth=box.eq(0).width();
+        this.container=container;
+        this.data=data;
+        this.setBody();
+        this.scroll();
+        this.onresize();
+    }
+    Position.prototype={
+        constructor:Position,
+        setBody(){
+            this.container.css("width",this.num()*220);
+            this.add();
+        },
+        box() {
+            return $(".box");
+        },
+        add() {
+            let [that,boxArr]=[this,[]];
+            this.box().each(function (index, value){
+                let boxheight = that.box().eq(index).height();
+                if (index < that.num()){
+                    $(value).removeAttr("style");
+                    boxArr[index] = boxheight;
+                } else {
+                    let minboxheight = Math.min(...boxArr);
+                    let minposiindex = $.inArray(minboxheight, boxArr);
+                    $(value).css({
+                        "position": "absolute",
+                        "top": minboxheight+5,
+                        "left": that.box().eq(minposiindex).position().left
+                    });
+                    boxArr[minposiindex] += (that.box().eq(index).height()+5);
+                }
+            });
+        },
+        scroll(){
+            let that=this;
+            window.onscroll = function (){
+                if (that.slidescroll()) {
+                    $.each(that.data,function(index,value){
+                        that.container.append(`<div class="box">
+                            <div class="content">
+                            <img width="200" src="images/${$(value).attr("src")}">
+                            </div>
+                        </div>`);
+                        that.setBody();
+                    });
+                }
+            };
+        },
+        onresize(){
+            let that=this;
+            window.onresize=function(){
+                that.setBody();
+            }
+        },
+        num() {
+            return (Math.floor($(window).width() / this.boxWidth));
+        },
+        slidescroll() {
+            return ($(document).height() <= $(window).height() + $(window).scrollTop() + 200);
+        }
+    };
+    $(window).on("load", function (){
+        const data =  [{"src": "1.jpg"}, {"src": "2.jpg"}, {"src": "3.jpg"}, {"src": "4.jpg"}, {"src": "5.jpg"},{"src": "6.jpg"},{"src": "7.jpg"},{"src": "8.jpg"},{"src": "9.jpg"},{"src": "10.jpg"}];
+        console.log(new Position($(".box"),$("#container"),data));
+    });
+</script>
+</html>

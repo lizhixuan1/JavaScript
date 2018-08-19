@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    float: left;
+    margin-left: 5px;
+    /*border: 1px solid #6c6c6c;*/
+
+}
+
+.content {
+    border: 1px solid #6c6c6c;
+    padding: 5px;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+img {
+    display: block;
+}

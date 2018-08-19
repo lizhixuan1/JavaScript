@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片瀑布流</title>
+    <style>
+        html,body,img,li,ul,ol,a{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+            text-decoration: none;
+        }
+        html,body{
+            width: 100%;
+            height:100%;
+        }
+        .main{
+            width: 1040px;
+            height:2000px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: red;
+            position: relative;
+        }
+        .main_lists{
+            width: 250px;
+            height:auto;
+            -webkit-box-shadow: 0 0 5px #000;
+            -moz-box-shadow: 0 0 5px #000;
+            margin: 0 5px;
+            float: left;
+        }
+        .img_k{
+            width: 248px;
+            height: 300px;
+            background: green;
+            margin-bottom: 10px;
+        }
+        /*@media screen and (max-width: 1300px) {
+            .main{
+                width: 1040px;
+            }
+        }
+        @media screen and (max-width: 1100px) {
+            .main{
+                width: 780px;
+            }
+        }
+        @media screen and (max-width: 900px) {
+            .main{
+                width: 520px;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .main{
+                width: 260px;
+            }
+        }*/
+    </style>
+</head>
+<body>
+<div class="main">
+
+</div>
+</body>
+<script src="jquery-2.2.0.min.js"></script>
+<script>
+    for(var i=0;i<20;i++){
+        if(i>=4){
+            $(".main").append("<div class='img_k' style='position: absolute;top:"+($(".main > div").eq(i-4).innerHeight())+"px;left: 0'></div>")
+            console.log(($(".main > div").eq(i-4).innerHeight())+($(".main > div").eq(i-4).offsetTop()))
+        }else{
+            $(".main").append("<div class='img_k' style='position: absolute;top:0;left: "+i*250+"px"+"'>"+i+"</div>")
+        }
+    }
+//封装面向对象函数
+   /* var Screen={
+        screenWidth:function (main,width) {
+            var child="<div class='main_lists'></div>";
+            $("."+main).empty();
+            for(var i=0;i<width;i++){$("."+main).append(child);}
+        },
+        addImg:function () {
+            var main_lists=document.getElementsByClassName("main_lists");
+            for(var j=0;j<4;j++){
+                for(var i=0;i<main_lists.length;i++){
+                    $(main_lists[i]).append("<div class='img_k' style='height: "+(Math.ceil((Math.random()*5+5))*30)+"px"+";background: url("+"img"+Math.ceil(Math.random()*10)+".jpg"+") no-repeat center center;'></div>");
+                }
+            }
+        },
+        If:function (main) {
+            if($("."+main).innerWidth()==1040){
+                Screen.screenWidth(main,4);
+                Screen.addImg();
+            }else if($("."+main).innerWidth()==780){
+                Screen.screenWidth(main,3);
+                Screen.addImg();
+            }else if($("."+main).innerWidth()==520){
+                Screen.screenWidth(main,2);
+                Screen.addImg();
+            }else if($("."+main).innerWidth()==260){
+                Screen.screenWidth(main,1);
+                Screen.addImg();
+            }
+        },
+        HeightMin:function () {
+            var heightMin;
+            var main_lists=document.getElementsByClassName("main_lists");
+            for(var i=0;i<main_lists.length;i++){
+                heightMin=main_lists[0];
+                for(var i=0;i<main_lists.length;i++){
+                    if(main_lists[i].scrollHeight<heightMin.scrollHeight){
+                        heightMin=main_lists[i];
+                    }
+                }
+            }
+            $(heightMin).append("<div class='img_k' style='height: "+(Math.ceil((Math.random()*5+5))*30)+"px"+";background: url("+"img"+Math.ceil(Math.random()*10)+".jpg"+") no-repeat center center;'></div>")
+        },
+        Onscroll:function (num) {
+            $(document).scroll(function () {
+                var windowTop = $(window).innerHeight();//屏幕窗口的高度
+                var scrollTop = $(document).scrollTop();//滚动条的卷去的高度
+                var documentTop = $(document).innerHeight();//整个内容的高度
+                if(scrollTop+windowTop==documentTop){
+                    for(var k=0;k<num;k++){
+                        Screen.HeightMin();
+                    }
+                }
+            });
+        }
+    };*/
+//执行命令
+    /*var main=document.getElementsByClassName("main")[0].className;
+    Screen.If(main);
+    $(window).resize(function(){
+        Screen.If(main);
+    });
+    Screen.Onscroll(5);*/
+</script>
+</html>
