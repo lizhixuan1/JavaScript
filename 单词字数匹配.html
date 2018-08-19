@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单词字数统计</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family:"微软雅黑";
+        }
+        .box{
+            width: 400px;
+            height:600px;
+            background: #f0f4f8;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .box-wz{
+            width: 400px;
+            height:40px;
+            background: #fffdef;
+            line-height: 40px;
+            border-bottom: 1px solid #ccc;
+        }
+        .on-off{
+            float: right;
+            font-size:16px;
+            font-weight:bold;
+            cursor: pointer;
+            user-select: none;
+            line-height: 40px;
+        }
+        .apple-box{
+            width: 400px;
+            height: 559px;
+            background: #03EA03;
+            position: relative;
+        }
+        textarea{
+            width: 398px;
+            height:557px;
+            padding: 0;
+            background: rgba(0,0,0,.05);
+            margin: 0;
+            font-size:16px;
+            color: #222;
+            resize:none;
+            text-align: right;
+            line-height: 1075px;
+            overflow-y:hidden
+        }
+        .apple-box > div > i{
+            display: block;
+            width: 70px;
+            height:70px;
+            text-align: center;
+            line-height: 70px;
+            color: #fff;
+            font-size:30px;
+            background: url("apple.png") no-repeat;
+            background-size: 70px 70px;
+            position: absolute;
+            top:0;
+        }
+        .app{
+            transition: all 6s linear;
+            -webkit-animation:ddd 5s linear;
+            -webkit-animation-fill-mode: forwards;
+        }
+        @-webkit-keyframes ddd{
+            0%{-webkit-transform:translateY(0);}
+            100%{-webkit-transform:translateY(489px);}
+        }
+        .alert{
+            width: 100%;
+            height:100%;
+            background: rgba(0,0,0,.2);
+            position: absolute;
+            z-index:1000;
+            /*display: none;*/
+        }
+        .alert-main{
+            width: 200px;
+            height:100px;
+            background: rgba(255,255,255,.95);
+            border-radius: 10px;
+            line-height: 80px;
+            font-size:20px;
+            overflow: hidden;
+            text-align: center;
+            user-select: none;
+            position: absolute;
+            top:200px;
+            left: 50%;
+            margin-left:-100px;
+        }
+        .alert-main > span{
+            display: block;
+            width: 23px;
+            height:23px;
+            text-align: center;
+            line-height: 23px;
+            color: #fff;
+            border-radius: 0 0 0 10px;
+            background: #ccc;
+            border: 2px outset #666;
+            cursor: pointer;
+            user-select: none;
+            position: absolute;
+            right:-3px;
+            top: -3px;
+        }
+        #open{
+            width: 190px;
+            height: 60px;
+            top:250px;
+            line-height: 60px;
+            cursor: pointer;
+            border: 5px outset #ccc;
+        }
+        #open:active{
+            border: 5px outset #999;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="alert">
+        <div class="alert-main" id="open">Start</div>
+        <div class="alert-main over" style="display: none;">Game Over<span>×</span></div>
+    </div>
+    <div class="box-wz">
+        <span style="float: left">
+            <span>Success Count: </span><span id="count">0</span>
+        </span>
+        <span class="on-off">暂停</span>
+        <span style="float: right">
+            <span>Life Value: </span><span id="count1">3</span>&nbsp;&nbsp;&nbsp;
+        </span>
+    </div>
+    <div class="apple-box">
+        <div></div>
+        <textarea name="word-count" id="word" cols="30" rows="10" disabled>版权所有：李智轩</textarea>
+    </div>
+</div>
+</body>
+<script src="js/jquery-2.2.0.min.js"></script>
+<script>
+//或者onkeyup,onkeydown事件都可以,onkeyup,onkeydown事件兼容性较好
+  //动态显示单词数量
+    /*$("#word").on("input",function (){
+        if($(this).val()!=""){
+            $("#count").text($("#word").val().trim().split(/\s+/g).length);
+        }else{
+            $("#count").text("0");
+        }
+    });*/
+    /*$("#word").on("input",function (){
+         if($(this).val()!=""){
+             if($("#word").val().match(/a/gi)){
+                 $("#count").text($("#word").val().match(/a/gi).length);
+             }
+         }else{
+            $("#count").text("0");
+         }
+    });*/
+    var apple_box=document.getElementsByClassName("apple-box")[0];
+    var apple_i=apple_box.getElementsByTagName("i");
+    var hide=null;
+    function hides() {
+        var counts=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+            "p","q","r","s","t","u","v","w","x","y","z"];
+        hide=setInterval(function () {
+            $(".apple-box").find("div").append("<i style='left:"+Math.round((Math.random()*7))*40+"px;" +
+                    "top:0' class='app'>"+counts[Math.round(Math.random()*25)]+"</i>");
+        },1000);
+    }
+    var show=null;
+    function shows() {
+        show=setInterval(function () {
+            for(var a=0;a<apple_i.length;a++){
+                if($(apple_i[a]).offset().top>=531){
+                    $(apple_i[a]).hide();
+                    document.getElementById("count1").innerHTML--;
+                    if(document.getElementById("count1").innerHTML==0){
+                        $(".alert,.alert-main").show();
+                        $("#open").hide();
+                        $(".apple-box").find("div").empty();
+                        $("#count").text("0");
+                        clearInterval(show);
+                        clearInterval(hide);
+                    }
+                }
+            }
+        },100);
+    }
+    $(".over span").click(function (){
+        $(".over").hide();
+        $("#open").show();
+    });
+    $("#open").click(function () {
+        $(".alert").hide();
+        $("#count1").text("3");
+        shows();
+        hides();
+    });
+    $(window).on("keyup",keyDown);
+    function keyDown(e) {
+        for(var a=0;a<apple_i.length;a++){
+            if(apple_i[a].innerHTML==e.key){
+                apple_i[a].remove();
+                document.getElementById("count").innerHTML++;
+            }
+        }
+    }
+    $(".on-off").click(function () {
+        if($(this).text()=="暂停"){
+            $(".app").css("-webkit-animation-play-state","paused");
+            clearInterval(show);
+            clearInterval(hide);
+            $(this).text("开始");
+            $(window).off("keyup",keyDown);
+        }else{
+            $(".app").css("-webkit-animation-play-state","");
+            $(".alert").hide();
+            shows();
+            hides();
+            $(this).text("暂停");
+            $(window).on("keyup",keyDown);
+        }
+    });
+</script>
+</html>
