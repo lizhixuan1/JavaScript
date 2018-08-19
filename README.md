@@ -1,8 +1,11 @@
-## JavaScript文件夹
-> 存储JS相关案例
+## Waterfall 分支
 
-#### 分支介绍
+存储 实现图片瀑布流加载 全部代码<br>
+Store the implementation image waterfall stream to load all the code
 
-> Vue-Demo 分支
+---
 
-存储 [使用Vue实现购物车案例](https://github.com/lizhixuan1/Vue/tree/Vue-Demo) 全部代码
+> 案例截图<br>
+Case screenshots
+
+![image](https://github.com/lizhixuan1/JavaScript/blob/Waterfall/pic.png?raw=true)
